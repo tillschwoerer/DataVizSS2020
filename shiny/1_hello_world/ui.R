@@ -1,0 +1,3 @@
+shinyUI(fluidPage(
+  "Hello world" 
+))

@@ -1,0 +1,13 @@
+library(shiny)
+library(shinydashboard)
+library(tidyverse)
+library(gapminder)
+library(plotly)
+library(DT)
+
+df <- gapminder %>% mutate(pop = as.numeric(gdpPercap))
+years <- unique(df$year)
+countries <- unique(df$country)
+continents <- unique(df$continent)
+vars <- c("lifeExp", "pop", "gdpPercap")
+DT_options <- list(pageLength = 5, lengthMenu = c(5, 10, 15, 20), dom="tpl")
