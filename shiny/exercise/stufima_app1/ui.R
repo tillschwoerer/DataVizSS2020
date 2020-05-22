@@ -16,7 +16,8 @@ shinyUI(fluidPage
                              choices = c("Waiting"="wait", "Eruptions"="erupt"), selected = "wait")
             ),
             mainPanel(
-                plotOutput("distPlot")
+                plotOutput("plot"),
+                DTOutput("output_dt")
             )
         )
     )

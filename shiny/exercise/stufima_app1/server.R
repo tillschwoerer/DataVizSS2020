@@ -1,5 +1,5 @@
 shinyServer(function(input, output) {
-    output$distPlot <- renderPlot({
+    output$plot <- renderPlot({
         switch (input$which,
             erupt = {
                 get_plot(input$which, input$which_c, input$erupt_filter)
@@ -9,4 +9,5 @@ shinyServer(function(input, output) {
             }
         )
     })
+    output$output_dt <- renderDT({df})
 })
