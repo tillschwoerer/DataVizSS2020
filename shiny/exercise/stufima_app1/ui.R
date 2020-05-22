@@ -5,12 +5,14 @@ shinyUI(fluidPage
         sidebarLayout
         (
             sidebarPanel(
-                numericInput("bins",
-                            "Number of bins:",
-                            min = 1,
-                            max = 50,
-                            value = 30),
-                radioButtons("which", label = "which histogram:",
+                sliderInput("erupt_filter",
+                            "Eruption time in mins:",
+                            min = er_filt_range[1],
+                            max = er_filt_range[2],
+                            value = 2.5),
+                radioButtons("which", label = "which:",
+                             choices = c("Waiting"="wait", "Eruptions"="erupt"), selected = "wait"),
+                radioButtons("which_c", label = "color for:",
                              choices = c("Waiting"="wait", "Eruptions"="erupt"), selected = "wait")
             ),
             mainPanel(

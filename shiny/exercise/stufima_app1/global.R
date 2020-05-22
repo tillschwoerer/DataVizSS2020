@@ -3,29 +3,26 @@ library(tidyverse)
 
 waiting <- faithful[, 2]
 eruptions <- faithful[, 1]
+er_filt_range <- range(eruptions)
 
-get_bins <- function(p_which, p_input_bins){
-  return(seq(min(p_which), max(p_which), length.out = p_input_bins + 1))
-}
-
-get_hist <- function(p_input_value, p_input_bins){
-  l_data <- NULL
-  l_title <- ""
-  l_title_pre <- "Histogram of"
-  l_title_suf <- ""
+get_plot <- function(p_input_value, p_input_color, p_filtervalue=2.5){
+  l_color <- ifelse(p_input_color=='erupt',"eruptions","waiting")
+  print(paste("Color", l_color))
   switch (p_input_value,
     erupt = {
-      l_data <- eruptions
-      l_title_suf <- "Eruptions"
-      l_title <- paste(l_title_pre , l_title_suf)
+      l_data_x <- "eruptions"
+      l_data_y <- "waiting"
     },
     {
-      l_data <- waiting
-      l_title_suf <- "Waiting"
-      l_title <- paste(l_title_pre , l_title_suf)
+      l_data_x <- "waiting"
+      l_data_y <- "eruptions"
     }
   )
-  bins <- get_bins(l_data, p_input_bins)
-  print(p_input_bins)
-  return (faithful %>% ggplot(aes(l_data), binwidth = p_input_bins) + geom_histogram())
+  return(
+    faithful %>%
+      filter(eruptions >= p_filtervalue) %>%
+      ggplot(aes(x = .data[[l_data_x]], y = .data[[l_data_y]], color = .data[[l_color]])) +
+      geom_point() +
+      geom_smooth()
+  )
 }
