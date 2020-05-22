@@ -26,5 +26,6 @@ get_hist <- function(p_input_value, p_input_bins){
     }
   )
   bins <- get_bins(l_data, p_input_bins)
-  return (hist(l_data,main = l_title, xlab = l_title_suf, breaks = bins, col = 'darkgray', border = 'white'))
+  print(p_input_bins)
+  return (faithful %>% ggplot(aes(l_data), binwidth = p_input_bins) + geom_histogram())
 }

@@ -10,7 +10,7 @@ shinyUI(fluidPage
                             min = 1,
                             max = 50,
                             value = 30),
-                radioButtons("which", label = "which historgramm:",
+                radioButtons("which", label = "which histogram:",
                              choices = c("Waiting"="wait", "Eruptions"="erupt"), selected = "wait")
             ),
             mainPanel(
